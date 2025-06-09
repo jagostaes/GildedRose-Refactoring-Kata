@@ -1,10 +1,12 @@
 package com.gildedrose;
 
+import java.util.List;
+
 class GildedRose {
     Item[] items;
 
-    public GildedRose(Item[] items) {
-        this.items = items;
+    public GildedRose(List<Item> items) {
+        this.items = items.toArray(new Item[0]);
     }
 
     public void updateQuality() {
