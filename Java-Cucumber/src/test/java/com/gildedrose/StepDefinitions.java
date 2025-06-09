@@ -37,7 +37,7 @@ public class StepDefinitions {
 
     @When("{int} days pass")
     public void x_days_pass(int days) {
-        IntStream.range(0, days).forEach(_ -> app.updateQuality());
+        IntStream.range(0, days).forEach(x -> app.updateQuality());
     }
 
     @Then("I should get item as {string}")
