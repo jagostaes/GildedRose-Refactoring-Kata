@@ -16,9 +16,9 @@ public class StepDefinitions {
     private List<Item> items = new ArrayList<>();
     private GildedRose app;
 
-    @Given("The item as {string} with quality {int}")
-    public void initial_sellin_is_and_quality_is(String name, int quality) {
-        items = List.of(new Item(name, 0, quality));
+    @Given("the item as {string} with sellIn {int} and quality {int}")
+    public void initial_sellin_is_and_quality_is(String name, int sellIn, int quality) {
+        items = List.of(new Item(name, sellIn, quality));
         app = new GildedRose(items);
     }
 
@@ -45,9 +45,14 @@ public class StepDefinitions {
         assertThat(expected).isEqualTo(app.items[0].name);
     }
 
-    @Then("The quality is updated to {int}")
-    public void the_quality_should_be_updated(int expected) {
+    @Then("the quality is updated to {int}")
+    public void the_quality_is_updated_to(int expected) {
         assertThat(expected).isEqualTo(app.items[0].quality);
+    }
+
+    @Then("the sellIn is updated to {int}")
+    public void the_sellIn_is_updated_to(int expected) {
+        assertThat(expected).isEqualTo(app.items[0].sellIn);
     }
 
     @Then("the items should have the following values:")
