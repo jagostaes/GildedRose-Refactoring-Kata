@@ -1,5 +1,5 @@
-Feature: Gilded Rose quality
-  I want to know if the quality is updated properly
+Feature: Gilded Rose Quality and sellIn
+  I want to know if the quality and sellIn are updated properly
 
   Scenario: Checking if quality is updated
     Given the item as "Elixir of the Mongoose" with sellIn 0 and quality 10
@@ -29,6 +29,11 @@ Feature: Gilded Rose quality
       | Backstage passes to a TAFKAL80ETC concert | 9      | 50      |
       | Backstage passes to a TAFKAL80ETC concert | 4      | 50      |
 
+  Scenario: When the sell by date has passed, quality degrades twice as fast
+    Given the item as "Elixir of the Mongoose" with sellIn 0 and quality 10
+    When 1 days pass
+    Then the quality is updated to 8
+
   Scenario: Quality of an item can never negative
     Given the item as "Elixir of the Mongoose" with sellIn 0 and quality 0
     When 1 days pass
@@ -49,6 +54,12 @@ Feature: Gilded Rose quality
     When 1 days pass
     Then the quality is updated to 80
     And the sellIn is updated to 10
+
+  Scenario: Backstage passes increase value by 1 when there are more than 10 days remaining
+    Given the item as "Backstage passes to a TAFKAL80ETC concert" with sellIn 15 and quality 10
+    When 1 days pass
+    Then the quality is updated to 11
+    And the sellIn is updated to 14
 
   Scenario: Backstage passes increase value by 2 when there are between 10 and 5 days remaining
     Given the item as "Backstage passes to a TAFKAL80ETC concert" with sellIn 8 and quality 10
