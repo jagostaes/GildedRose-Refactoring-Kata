@@ -43,17 +43,17 @@ public class StepDefinitions {
 
     @Then("I should get item as {string}")
     public void i_should_get_sellin_as_and_quality_as(String expected) {
-        assertThat(expected).isEqualTo(app.items[0].name);
+        assertThat(expected).isEqualTo(app.getItems().getFirst().name);
     }
 
     @Then("the quality is updated to {int}")
     public void the_quality_is_updated_to(int expected) {
-        assertThat(expected).isEqualTo(app.items[0].quality);
+        assertThat(expected).isEqualTo(app.getItems().getFirst().quality);
     }
 
     @Then("the sellIn is updated to {int}")
     public void the_sellIn_is_updated_to(int expected) {
-        assertThat(expected).isEqualTo(app.items[0].sellIn);
+        assertThat(expected).isEqualTo(app.getItems().getFirst().sellIn);
     }
 
     @Then("the items should have the following values:")

@@ -5,10 +5,10 @@ import com.gildedrose.domain.Item;
 import java.util.List;
 
 class GildedRose {
-    Item[] items;
+    List<Item> items;
 
     public GildedRose(List<Item> items) {
-        this.items = items.toArray(new Item[0]);
+        this.items = items;
     }
 
     public void updateQuality() {
@@ -62,5 +62,9 @@ class GildedRose {
                 }
             }
         }
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }
