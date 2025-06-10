@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 import com.gildedrose.domain.AgedBrieUpdater;
+import com.gildedrose.domain.BackstagePassesUpdater;
 import com.gildedrose.domain.Item;
 import com.gildedrose.domain.ItemUpdater;
 
@@ -19,14 +20,15 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (!isSulfuras(item) && !isAgedBrie(item)) {
+            if (!isSulfuras(item) && !isAgedBrie(item) && !isBackstagePasses(item)) {
                 decreaseSellIn(item);
             }
 
             if (isRegularItem(item)) {
                 updateQualityOfRegularItem(item);
             } else if (isBackstagePasses(item)) {
-                updateQualityOfBackstagePasses(item);
+                ItemUpdater updater = new BackstagePassesUpdater(item);
+                updater.updateItem(item);
             } else if (isAgedBrie(item)) {
                 ItemUpdater updater = new AgedBrieUpdater(item);
                 updater.updateItem(item);
@@ -40,19 +42,6 @@ class GildedRose {
         } else {
             decreaseQuality(item, 2);
         }
-    }
-
-    private static void updateQualityOfBackstagePasses(Item item) {
-        switch (valueOf(item.sellIn)) {
-            case Integer s when s >= 10 -> increaseQuality(item, 1);
-            case Integer s when s >= 5 -> increaseQuality(item, 2);
-            case Integer s when s >= 0 -> increaseQuality(item, 3);
-            default -> resetQuality(item);
-        }
-    }
-
-    private static void resetQuality(Item item) {
-        item.quality = 0;
     }
 
     private static void decreaseSellIn(Item item) {

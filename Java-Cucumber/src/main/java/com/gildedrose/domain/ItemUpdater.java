@@ -3,7 +3,7 @@ package com.gildedrose.domain;
 public abstract class ItemUpdater {
     protected final Item item;
 
-    protected ItemUpdater(Item item) {
+    public ItemUpdater(Item item) {
         this.item = item;
     }
 
