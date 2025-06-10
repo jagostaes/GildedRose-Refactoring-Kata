@@ -1,15 +1,8 @@
 package com.gildedrose;
 
-import com.gildedrose.domain.AgedBrieUpdater;
-import com.gildedrose.domain.BackstagePassesUpdater;
-import com.gildedrose.domain.Item;
-import com.gildedrose.domain.ItemUpdater;
+import com.gildedrose.domain.*;
 
 import java.util.List;
-
-import static com.gildedrose.domain.ItemUpdater.decreaseQuality;
-import static com.gildedrose.domain.ItemUpdater.increaseQuality;
-import static java.lang.Integer.valueOf;
 
 class GildedRose {
     List<Item> items;
@@ -20,27 +13,20 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (!isSulfuras(item) && !isAgedBrie(item) && !isBackstagePasses(item)) {
+            if (!isSulfuras(item) && !isAgedBrie(item) && !isBackstagePasses(item) && !isRegularItem(item)) {
                 decreaseSellIn(item);
             }
 
             if (isRegularItem(item)) {
-                updateQualityOfRegularItem(item);
+                ItemUpdater itemUpdater = new RegularItemUpdater(item);
+                itemUpdater.updateItem();
             } else if (isBackstagePasses(item)) {
                 ItemUpdater updater = new BackstagePassesUpdater(item);
-                updater.updateItem(item);
+                updater.updateItem();
             } else if (isAgedBrie(item)) {
                 ItemUpdater updater = new AgedBrieUpdater(item);
-                updater.updateItem(item);
+                updater.updateItem();
             }
-        }
-    }
-
-    private void updateQualityOfRegularItem(Item item) {
-        if (item.sellIn > 0) {
-            decreaseQuality(item, 1);
-        } else {
-            decreaseQuality(item, 2);
         }
     }
 

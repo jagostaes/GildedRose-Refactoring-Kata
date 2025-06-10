@@ -7,7 +7,7 @@ public abstract class ItemUpdater {
         this.item = item;
     }
 
-    public void updateItem(Item item) {
+    public void updateItem() {
         decreaseSellIn();
         updateQuality();
         if (item.sellIn < 0) {
