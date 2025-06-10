@@ -1,9 +1,13 @@
 package com.gildedrose;
 
+import com.gildedrose.domain.AgedBrieUpdater;
 import com.gildedrose.domain.Item;
+import com.gildedrose.domain.ItemUpdater;
 
 import java.util.List;
 
+import static com.gildedrose.domain.ItemUpdater.decreaseQuality;
+import static com.gildedrose.domain.ItemUpdater.increaseQuality;
 import static java.lang.Integer.valueOf;
 
 class GildedRose {
@@ -15,7 +19,7 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (!isSulfuras(item)) {
+            if (!isSulfuras(item) && !isAgedBrie(item)) {
                 decreaseSellIn(item);
             }
 
@@ -24,16 +28,9 @@ class GildedRose {
             } else if (isBackstagePasses(item)) {
                 updateQualityOfBackstagePasses(item);
             } else if (isAgedBrie(item)) {
-                updateQualityOfAgedBrie(item);
+                ItemUpdater updater = new AgedBrieUpdater(item);
+                updater.updateItem(item);
             }
-        }
-    }
-
-    private void updateQualityOfAgedBrie(Item item) {
-        if (item.sellIn > 0) {
-            increaseQuality(item, 1);
-        } else {
-            increaseQuality(item, 2);
         }
     }
 
@@ -56,16 +53,6 @@ class GildedRose {
 
     private static void resetQuality(Item item) {
         item.quality = 0;
-    }
-
-    private static void decreaseQuality(Item item, int amount) {
-        item.quality = Math.max(item.quality - amount, 0);
-    }
-
-    private static void increaseQuality(Item item, int amount) {
-        if (!isSulfuras(item)) {
-            item.quality = Math.min((item.quality + amount), 50);
-        }
     }
 
     private static void decreaseSellIn(Item item) {
