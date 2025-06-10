@@ -19,32 +19,28 @@ class GildedRose {
                 decreaseSellIn(item);
             }
 
-            if (isRegularItem(item) && item.quality > 0) {
-                decreaseQuality(item, 1);
+            if (isRegularItem(item)) {
+                updateQualityOfRegularItem(item);
             } else if (isBackstagePasses(item)) {
                 updateQualityOfBackstagePasses(item);
             } else {
                 increaseQuality(item, 1);
             }
 
-
-            if (item.sellIn < 0) {
-                if (!isAgedBrie(item)) {
-                    if (!isBackstagePasses(item)) {
-                        if (item.quality > 0) {
-                            if (!isSulfuras(item)) {
-                                decreaseQuality(item, 1);
-                            }
-                        }
-                    } else {
-                        resetQuality(item);
-                    }
-                } else {
+            if (item.sellIn < 0 && isAgedBrie(item)) {
                     if (item.quality < 50) {
                         increaseQuality(item, 1);
                     }
                 }
             }
+
+    }
+
+    private void updateQualityOfRegularItem(Item item) {
+        if (item.sellIn > 0) {
+            decreaseQuality(item, 1);
+        } else {
+            decreaseQuality(item, 2);
         }
     }
 
@@ -62,7 +58,7 @@ class GildedRose {
     }
 
     private static void decreaseQuality(Item item, int amount) {
-        item.quality = item.quality - amount;
+        item.quality = Math.max(item.quality - amount, 0);
     }
 
     private static void increaseQuality(Item item, int amount) {
