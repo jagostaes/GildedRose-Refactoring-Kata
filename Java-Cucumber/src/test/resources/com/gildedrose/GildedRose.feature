@@ -78,3 +78,12 @@ Feature: Gilded Rose Quality and sellIn
     When 1 days pass
     Then the quality is updated to 0
     And the sellIn is updated to -1
+
+  Scenario: Checking if Conjured item quality decreases twice as fast
+    Given the item as "Conjured Elixir of the Mongoose" with sellIn 5 and quality 10
+    When 1 days pass
+    Then the quality is updated to 8
+    When 3 days pass
+    Then the quality is updated to 2
+    When 5 days pass
+    Then the quality is updated to 0

@@ -120,7 +120,6 @@ class GildedRoseTest {
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-                // fixme: this conjured item does not work properly yet
                 new Item("Conjured Mana Cake", 3, 6)};
 
         updateItems(items);
@@ -157,7 +156,9 @@ class GildedRoseTest {
         assertThat(items[7].sellIn).isEqualTo(4);
         assertThat(items[7].quality).isEqualTo(50);
 
-        // todo: assert conjured item after implementation
+        assertThat(items[8].name).isEqualTo("Conjured Mana Cake");
+        assertThat(items[8].sellIn).isEqualTo(2);
+        assertThat(items[8].quality).isEqualTo(4);
     }
 
 
