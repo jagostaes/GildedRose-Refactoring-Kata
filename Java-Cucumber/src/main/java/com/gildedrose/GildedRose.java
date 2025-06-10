@@ -16,23 +16,23 @@ class GildedRose {
             if (!isAgedBrie(item) && !isBackstagePasses(item)) {
                 if (item.quality > 0) {
                     if (!isSulfuras(item)) {
-                        item.quality = item.quality - 1;
+                        decreaseQuality(item, 1);
                     }
                 }
             } else {
                 if (item.quality < 50) {
-                    item.quality = item.quality + 1;
+                    increaseQuality(item, 1);
 
                     if (isBackstagePasses(item)) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
-                                item.quality = item.quality + 1;
+                                increaseQuality(item, 1);
                             }
                         }
 
                         if (item.sellIn < 6) {
                             if (item.quality < 50) {
-                                item.quality = item.quality + 1;
+                                increaseQuality(item, 1);
                             }
                         }
                     }
@@ -48,19 +48,31 @@ class GildedRose {
                     if (!isBackstagePasses(item)) {
                         if (item.quality > 0) {
                             if (!isSulfuras(item)) {
-                                item.quality = item.quality - 1;
+                                decreaseQuality(item, 1);
                             }
                         }
                     } else {
-                        item.quality = 0;
+                        resetQuality(item);
                     }
                 } else {
                     if (item.quality < 50) {
-                        item.quality = item.quality + 1;
+                        increaseQuality(item, 1);
                     }
                 }
             }
         }
+    }
+
+    private static void resetQuality(Item item) {
+        item.quality = 0;
+    }
+
+    private static void decreaseQuality(Item item, int amount) {
+        item.quality = item.quality - amount;
+    }
+
+    private static void increaseQuality(Item item, int amount) {
+        item.quality = item.quality + amount;
     }
 
     private static boolean isSulfuras(Item item) {
