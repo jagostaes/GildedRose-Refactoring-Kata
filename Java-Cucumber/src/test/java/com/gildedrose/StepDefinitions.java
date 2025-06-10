@@ -43,17 +43,17 @@ public class StepDefinitions {
 
     @Then("I should get item as {string}")
     public void i_should_get_sellin_as_and_quality_as(String expected) {
-        assertThat(expected).isEqualTo(app.getItems().getFirst().name);
+        assertThat(app.getItems().getFirst().name).isEqualTo(expected);
     }
 
     @Then("the quality is updated to {int}")
     public void the_quality_is_updated_to(int expected) {
-        assertThat(expected).isEqualTo(app.getItems().getFirst().quality);
+        assertThat(app.getItems().getFirst().quality).isEqualTo(expected);
     }
 
     @Then("the sellIn is updated to {int}")
     public void the_sellIn_is_updated_to(int expected) {
-        assertThat(expected).isEqualTo(app.getItems().getFirst().sellIn);
+        assertThat(app.getItems().getFirst().sellIn).isEqualTo(expected);
     }
 
     @Then("the items should have the following values:")
@@ -63,9 +63,9 @@ public class StepDefinitions {
             Map<String, String> expectedItem = expected.get(i);
             Item actualItem = items.get(i);
 
-            assertThat(expectedItem.get("name")).isEqualTo(actualItem.name);
-            assertThat(Integer.parseInt(expectedItem.get("sellIn"))).isEqualTo(actualItem.sellIn);
-            assertThat(Integer.parseInt(expectedItem.get("quality"))).isEqualTo(actualItem.quality);
+            assertThat(actualItem.name).isEqualTo(expectedItem.get("name"));
+            assertThat(actualItem.sellIn).isEqualTo(Integer.parseInt(expectedItem.get("sellIn")));
+            assertThat(actualItem.quality).isEqualTo(Integer.parseInt(expectedItem.get("quality")));
         }
     }
 }
