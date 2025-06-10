@@ -13,10 +13,6 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (!isSulfuras(item) && !isAgedBrie(item) && !isBackstagePasses(item) && !isRegularItem(item)) {
-                decreaseSellIn(item);
-            }
-
             if (isRegularItem(item)) {
                 ItemUpdater itemUpdater = new RegularItemUpdater(item);
                 itemUpdater.updateItem();
@@ -28,10 +24,6 @@ class GildedRose {
                 updater.updateItem();
             }
         }
-    }
-
-    private static void decreaseSellIn(Item item) {
-        item.sellIn--;
     }
 
     private static boolean isRegularItem(Item item) {
