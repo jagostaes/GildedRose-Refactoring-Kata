@@ -1,8 +1,8 @@
 package com.gildedrose.domain;
 
-public class AgedBrieUpdater extends ItemUpdater {
+class AgedBrieUpdater extends ItemUpdater {
 
-    public AgedBrieUpdater(Item item) {
+    protected AgedBrieUpdater(Item item) {
         super(item);
     }
 
@@ -17,6 +17,5 @@ public class AgedBrieUpdater extends ItemUpdater {
 
     @Override
     protected void expireItem() {
-
     }
 }

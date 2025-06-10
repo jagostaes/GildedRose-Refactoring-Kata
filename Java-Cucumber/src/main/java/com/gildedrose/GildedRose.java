@@ -13,33 +13,9 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (isRegularItem(item)) {
-                ItemUpdater itemUpdater = new RegularItemUpdater(item);
-                itemUpdater.updateItem();
-            } else if (isBackstagePasses(item)) {
-                ItemUpdater updater = new BackstagePassesUpdater(item);
-                updater.updateItem();
-            } else if (isAgedBrie(item)) {
-                ItemUpdater updater = new AgedBrieUpdater(item);
-                updater.updateItem();
-            }
+            ItemUpdater updater = TypeSelector.getUpdaterForItem(item);
+            updater.updateItem();
         }
-    }
-
-    private static boolean isRegularItem(Item item) {
-        return !isSulfuras(item) && !isBackstagePasses(item) && !isAgedBrie(item);
-    }
-
-    private static boolean isSulfuras(Item item) {
-        return item.name.startsWith("Sulfuras");
-    }
-
-    private static boolean isBackstagePasses(Item item) {
-        return item.name.startsWith("Backstage passes");
-    }
-
-    private static boolean isAgedBrie(Item item) {
-        return item.name.equals("Aged Brie");
     }
 
     public List<Item> getItems() {

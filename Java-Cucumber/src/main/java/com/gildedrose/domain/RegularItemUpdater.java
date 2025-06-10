@@ -1,7 +1,7 @@
 package com.gildedrose.domain;
 
-public class RegularItemUpdater extends ItemUpdater {
-    public RegularItemUpdater(Item item) {
+class RegularItemUpdater extends ItemUpdater {
+    protected RegularItemUpdater(Item item) {
         super(item);
     }
 
@@ -16,6 +16,5 @@ public class RegularItemUpdater extends ItemUpdater {
 
     @Override
     protected void expireItem() {
-
     }
 }

@@ -2,8 +2,8 @@ package com.gildedrose.domain;
 
 import static java.lang.Integer.valueOf;
 
-public class BackstagePassesUpdater extends ItemUpdater{
-    public BackstagePassesUpdater(Item item) {
+class BackstagePassesUpdater extends ItemUpdater{
+    protected BackstagePassesUpdater(Item item) {
         super(item);
     }
 
@@ -13,16 +13,12 @@ public class BackstagePassesUpdater extends ItemUpdater{
             case Integer s when s >= 10 -> increaseQuality(item, 1);
             case Integer s when s >= 5 -> increaseQuality(item, 2);
             case Integer s when s >= 0 -> increaseQuality(item, 3);
-            default -> resetQuality(item);
+            default -> expireItem();
         }
-    }
-
-    private static void resetQuality(Item item) {
-        item.quality = 0;
     }
 
     @Override
     protected void expireItem() {
-
+        item.quality = 0;
     }
 }

@@ -1,7 +1,7 @@
 package com.gildedrose.domain;
 
-public class SulfurasUpdater extends ItemUpdater {
-    public SulfurasUpdater(Item item) {
+class SulfurasUpdater extends ItemUpdater {
+    protected SulfurasUpdater(Item item) {
         super(item);
     }
 
