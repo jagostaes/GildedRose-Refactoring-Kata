@@ -23,17 +23,18 @@ class GildedRose {
                 updateQualityOfRegularItem(item);
             } else if (isBackstagePasses(item)) {
                 updateQualityOfBackstagePasses(item);
-            } else {
-                increaseQuality(item, 1);
+            } else if (isAgedBrie(item)) {
+                updateQualityOfAgedBrie(item);
             }
+        }
+    }
 
-            if (item.sellIn < 0 && isAgedBrie(item)) {
-                    if (item.quality < 50) {
-                        increaseQuality(item, 1);
-                    }
-                }
-            }
-
+    private void updateQualityOfAgedBrie(Item item) {
+        if (item.sellIn > 0) {
+            increaseQuality(item, 1);
+        } else {
+            increaseQuality(item, 2);
+        }
     }
 
     private void updateQualityOfRegularItem(Item item) {
